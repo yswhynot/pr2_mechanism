@@ -26,10 +26,12 @@ add_definitions(-O3)
 add_library(pr2_controller_manager src/controller_manager.cpp src/scheduler.cpp)
 
 target_link_libraries(pr2_controller_manager ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+add_dependencies(${PROJECT_NAME} ${catkin_EXPORTED_TARGETS} pr2_mechanism_msgs_gencpp)
 
 add_library(controller_test test/controllers/test_controller.cpp)
 pr2_enable_rpath(controller_test)
 target_link_libraries(controller_test ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+add_dependencies(controller_test ${catkin_EXPORTED_TARGETS} pr2_mechanism_msgs_gencpp)
 
 add_executable(test_controllers test/test.cpp)
 add_executable(test_robot test/robot.cpp)
